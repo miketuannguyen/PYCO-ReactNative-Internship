@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, CheckBox, Button} from 'react-native';
-import {Tabs, DatePicker} from 'antd-mobile';
+import {Text, View, CheckBox, Button, Platform} from 'react-native';
+import {Tabs} from 'antd-mobile';
 import SignUpStyles from './SignUpPage.styles';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import InputFormComponent from '../Form/InputForm';
 
@@ -14,9 +15,24 @@ const tabs = [
 export default class Cat extends Component {
   state = {
     maleCheck: false,
+    isDatePickerShow: false,
+    birthDayInput: '',
+  };
+
+  onChange = (event, selectedDate) => {
+    this.setState({isDatePickerShow: false});
+    this.setState({isDatePickerShow: Platform.OS === 'ios'});
+    this.setState({birthDayInput: selectedDate});
+  };
+
+  showDatePicker = () => {
+    console.log('weqwejnii');
+    this.setState({isDatePickerShow: true});
   };
 
   render() {
+    const {maleCheck, isDatePickerShow} = this.state;
+
     return (
       <View style={SignUpStyles.container}>
         <View style={SignUpStyles.headerContainer}>
@@ -32,20 +48,31 @@ export default class Cat extends Component {
         />
         <InputFormComponent placeholder="Email" />
         <InputFormComponent secureTextEntry={true} placeholder="Mật khẩu" />
-        <InputFormComponent placeholder="Ngày sinh" />
+        <InputFormComponent
+          onPress={this.showDatePicker}
+          placeholder="Ngày sinh"
+        />
+        {isDatePickerShow ? (
+          <DateTimePicker
+            testID="dateTimePicker"
+            mode="date"
+            display="default"
+            onChange={this.onChange}
+          />
+        ) : null}
         {/* <DatePicker mode="date" title="Ngày sinh" /> */}
         <View style={SignUpStyles.checkBoxContainer}>
           {/*this doesnt work*/}
           <CheckBox
-            onPress={() => this.setState({maleCheck: !this.state.maleCheck})}
+            onPress={() => this.setState({maleCheck: !maleCheck})}
             center
-            checked={this.state.maleCheck}
+            checked={maleCheck}
           />
           <Text>Nam</Text>
           <CheckBox
-            onPress={() => this.setState({maleCheck: !this.state.maleCheck})}
+            onPress={() => this.setState({maleCheck: !maleCheck})}
             center
-            checked={!this.state.maleCheck}
+            checked={maleCheck}
           />
           <Text>Nữ</Text>
         </View>
