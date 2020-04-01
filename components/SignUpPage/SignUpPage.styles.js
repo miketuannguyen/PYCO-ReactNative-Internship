@@ -27,9 +27,6 @@ const SignUpStyles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   checkBoxContainer: {
-    flexDirection: 'row',
-  },
-  checkBoxStyle: {
     marginTop: 0,
     marginLeft: 20,
     marginBottom: 10,
@@ -37,6 +34,26 @@ const SignUpStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
+  },
+  buttom: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    marginBottom: 15,
+    alignItems: 'center',
+    //backgroundColor: 'black',
+  },
+  signUpButton: {
+    marginTop: 30,
+    marginLeft: 30,
+    marginRight: 30,
+    //cant set button width
+  },
+  bottomText: {
+    marginTop: 10,
+  },
+  policy: {
+    color: constants.tikiColor,
+    textDecorationLine: 'underline',
   },
 });
 

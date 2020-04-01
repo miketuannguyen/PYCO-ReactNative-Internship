@@ -4,7 +4,7 @@ const InputFormStyles = StyleSheet.create({
   container: {
     marginTop: 0,
     marginLeft: 20,
-    marginBottom: 10,
+    marginBottom: 14,
     marginRight: 20,
     borderBottomColor: 'grey',
     borderBottomWidth: 2,
