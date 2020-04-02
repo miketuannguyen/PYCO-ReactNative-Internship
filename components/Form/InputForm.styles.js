@@ -4,11 +4,13 @@ const InputFormStyles = StyleSheet.create({
   container: {
     marginTop: 0,
     marginLeft: 20,
-    marginBottom: 14,
+    marginBottom: 5,
     marginRight: 20,
     borderBottomColor: 'grey',
     borderBottomWidth: 2,
-    marginVertical: 4,
+  },
+  inputStyle: {
+    height: 40,
   },
 });
 

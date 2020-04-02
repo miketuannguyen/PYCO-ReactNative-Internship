@@ -71,4 +71,4 @@ class BaseApi {
     this.baseMethod(METHOD.DELETE, pathname, body, token);
 }
 
-module.exports = BaseApi;
+export default BaseApi;

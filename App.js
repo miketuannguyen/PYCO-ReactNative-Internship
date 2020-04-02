@@ -9,8 +9,6 @@
 import React from 'react';
 import SignUpPageComponent from './components/SignUpPage/SignUpPage.js';
 
-import {Header, Colors} from 'react-native/Libraries/NewAppScreen';
-
 const App: () => React$Node = () => {
   return <SignUpPageComponent />;
 };

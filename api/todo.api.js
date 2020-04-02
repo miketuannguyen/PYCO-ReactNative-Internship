@@ -1,4 +1,4 @@
-const BaseApi = require('./axios.base.api');
+import BaseApi from './fetch.base.api';
 
 class TodoApi extends BaseApi {
   constructor() {
@@ -14,4 +14,4 @@ class TodoApi extends BaseApi {
     }
   };
 }
-module.exports = TodoApi;
+export default TodoApi;

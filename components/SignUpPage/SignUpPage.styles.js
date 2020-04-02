@@ -55,6 +55,20 @@ const SignUpStyles = StyleSheet.create({
     color: constants.tikiColor,
     textDecorationLine: 'underline',
   },
+  birthDayText: {
+    marginLeft: 20,
+  },
+  birthDayInput: {
+    marginTop: 0,
+    marginLeft: 20,
+    marginBottom: 14,
+    marginRight: 20,
+    borderBottomColor: 'grey',
+    borderBottomWidth: 2,
+    marginVertical: 4,
+    height: 40,
+    textAlignVertical: 'center',
+  },
 });
 
 export default SignUpStyles;

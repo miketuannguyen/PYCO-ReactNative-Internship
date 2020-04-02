@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, CheckBox, Button, Platform} from 'react-native';
+import {Text, View, CheckBox, Button} from 'react-native';
 import {Tabs} from 'antd-mobile';
 import SignUpStyles from './SignUpPage.styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -10,28 +10,45 @@ const tabs = [
   {title: 'Đăng nhập', sub: '1'},
   {title: 'Đăng ký', sub: '2'},
 ];
-//where console.log :D ???
+
+const DATE_OPTIONS = {year: 'numeric', month: 'numeric', day: 'numeric'};
 
 export default class Cat extends Component {
   state = {
     maleCheck: false,
+    femaleCheck: false,
     isDatePickerShow: false,
-    birthDayInput: '',
+    birthDayInput: new Date(1598051730000),
   };
 
   onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || this.state.birthDayInput;
+    this.setState({birthDayInput: currentDate});
     this.setState({isDatePickerShow: false});
-    this.setState({isDatePickerShow: Platform.OS === 'ios'});
-    this.setState({birthDayInput: selectedDate});
   };
 
   showDatePicker = () => {
-    console.log('weqwejnii');
     this.setState({isDatePickerShow: true});
   };
 
+  onCheck = () => {
+    const {maleCheck, femaleCheck} = this.state;
+
+    console.log(maleCheck, femaleCheck);
+
+    this.setState({
+      maleCheck: !maleCheck,
+      femaleCheck: !femaleCheck,
+    });
+  };
+
   render() {
-    const {maleCheck, isDatePickerShow} = this.state;
+    const {
+      maleCheck,
+      femaleCheck,
+      isDatePickerShow,
+      birthDayInput,
+    } = this.state;
 
     return (
       <View style={SignUpStyles.container}>
@@ -41,39 +58,34 @@ export default class Cat extends Component {
         <View style={SignUpStyles.tabContainer}>
           <Tabs style={SignUpStyles.tabStyle} tabs={tabs} initialPage={1} />
         </View>
-        <InputFormComponent placeholder="Họ và tên" />
+        <InputFormComponent textAbove="Họ và tên" />
         <InputFormComponent
-          keyboardType="numeric"
-          placeholder="Số điện thoại"
+          textAbove="Số điện thoại"
+          inputProps={{keyboardType: 'numeric'}}
         />
-        <InputFormComponent placeholder="Email" />
-        <InputFormComponent secureTextEntry={true} placeholder="Mật khẩu" />
+        <InputFormComponent textAbove="Email" />
         <InputFormComponent
-          onPress={this.showDatePicker}
-          placeholder="Ngày sinh"
+          inputProps={{secureTextEntry: true}}
+          textAbove="Mật khẩu"
         />
+        <Text style={SignUpStyles.birthDayText}>Ngày sinh</Text>
+        <Text style={SignUpStyles.birthDayInput} onPress={this.showDatePicker}>
+          {' ' + birthDayInput.toLocaleDateString('en-GB', DATE_OPTIONS)}
+        </Text>
         {isDatePickerShow ? (
           <DateTimePicker
             testID="dateTimePicker"
             mode="date"
+            value={birthDayInput}
             display="default"
             onChange={this.onChange}
           />
         ) : null}
-        {/* <DatePicker mode="date" title="Ngày sinh" /> */}
         <View style={SignUpStyles.checkBoxContainer}>
           {/*this doesnt work*/}
-          <CheckBox
-            onPress={() => this.setState({maleCheck: !maleCheck})}
-            center
-            checked={maleCheck}
-          />
+          <CheckBox onPress={this.onCheck} center checked={maleCheck} />
           <Text>Nam</Text>
-          <CheckBox
-            onPress={() => this.setState({maleCheck: !maleCheck})}
-            center
-            checked={maleCheck}
-          />
+          <CheckBox onPress={this.onCheck} center checked={femaleCheck} />
           <Text>Nữ</Text>
         </View>
         <View style={SignUpStyles.buttom}>
