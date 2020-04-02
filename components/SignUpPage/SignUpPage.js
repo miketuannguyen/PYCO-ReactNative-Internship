@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, CheckBox, Button} from 'react-native';
+import moment from 'moment';
 import {Tabs} from 'antd-mobile';
 import SignUpStyles from './SignUpPage.styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -11,14 +12,12 @@ const tabs = [
   {title: 'Đăng ký', sub: '2'},
 ];
 
-const DATE_OPTIONS = {year: 'numeric', month: 'numeric', day: 'numeric'};
-
 export default class Cat extends Component {
   state = {
     maleCheck: false,
     femaleCheck: false,
     isDatePickerShow: false,
-    birthDayInput: new Date(1598051730000),
+    birthDayInput: new Date(),
   };
 
   onChange = (event, selectedDate) => {
@@ -69,8 +68,10 @@ export default class Cat extends Component {
           textAbove="Mật khẩu"
         />
         <Text style={SignUpStyles.birthDayText}>Ngày sinh</Text>
-        <Text style={SignUpStyles.birthDayInput} onPress={this.showDatePicker}>
-          {' ' + birthDayInput.toLocaleDateString('en-GB', DATE_OPTIONS)}
+        <Text
+          style={SignUpStyles.birthDayInputStyle}
+          onPress={this.showDatePicker}>
+          {' ' + moment(birthDayInput).format('DD/MM/YYYY')}
         </Text>
         {isDatePickerShow ? (
           <DateTimePicker
@@ -84,16 +85,12 @@ export default class Cat extends Component {
         <View style={SignUpStyles.checkBoxContainer}>
           {/*this doesnt work*/}
           <CheckBox onPress={this.onCheck} center checked={maleCheck} />
-          <Text>Nam</Text>
+          <Text style={SignUpStyles.checkBoxText}>Nam</Text>
           <CheckBox onPress={this.onCheck} center checked={femaleCheck} />
-          <Text>Nữ</Text>
+          <Text style={SignUpStyles.checkBoxText}>Nữ</Text>
         </View>
+        <Button color="red" style={SignUpStyles.signUpButton} title="Đăng ký" />
         <View style={SignUpStyles.buttom}>
-          <Button
-            color="red"
-            style={SignUpStyles.signUpButton}
-            title="Đăng ký"
-          />
           <Text style={SignUpStyles.bottomText}>
             Khi đăng ký là bạn đã chấp nhận{' '}
             <Text style={SignUpStyles.policy}>điều khoản sử dụng</Text>

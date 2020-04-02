@@ -27,13 +27,17 @@ const SignUpStyles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   checkBoxContainer: {
-    marginTop: 0,
+    marginTop: 10,
     marginLeft: 20,
-    marginBottom: 10,
+    marginBottom: 30,
     marginRight: 20,
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 10,
+    fontSize: constants.appFontSize,
+  },
+  checkBoxText: {
+    fontSize: constants.appFontSize,
   },
   buttom: {
     flex: 1,
@@ -46,10 +50,11 @@ const SignUpStyles = StyleSheet.create({
     marginTop: 30,
     marginLeft: 30,
     marginRight: 30,
-    //cant set button width
+    width: 300,
   },
   bottomText: {
     marginTop: 10,
+    fontSize: 15,
   },
   policy: {
     color: constants.tikiColor,
@@ -57,17 +62,19 @@ const SignUpStyles = StyleSheet.create({
   },
   birthDayText: {
     marginLeft: 20,
+    fontSize: constants.appFontSize,
   },
-  birthDayInput: {
-    marginTop: 0,
+  birthDayInputStyle: {
+    marginTop: 10,
     marginLeft: 20,
-    marginBottom: 14,
+    marginBottom: 10,
     marginRight: 20,
     borderBottomColor: 'grey',
     borderBottomWidth: 2,
     marginVertical: 4,
     height: 40,
     textAlignVertical: 'center',
+    fontSize: constants.appFontSize,
   },
 });
 
