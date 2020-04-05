@@ -4,6 +4,7 @@ import moment from 'moment';
 import {Tabs} from 'antd-mobile';
 import SignUpStyles from './SignUpPage.styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import api from '../../api/index';
 
 import InputFormComponent from '../Form/InputForm';
 
@@ -14,8 +15,7 @@ const tabs = [
 
 export default class Cat extends Component {
   state = {
-    maleCheck: false,
-    femaleCheck: false,
+    maleCheck: true,
     isDatePickerShow: false,
     birthDayInput: new Date(),
   };
@@ -26,28 +26,29 @@ export default class Cat extends Component {
     this.setState({isDatePickerShow: false});
   };
 
-  showDatePicker = () => {
+  showDatePicker = (e) => {
+    e.preventDefault();
     this.setState({isDatePickerShow: true});
   };
 
   onCheck = () => {
-    const {maleCheck, femaleCheck} = this.state;
-
-    console.log(maleCheck, femaleCheck);
-
+    const {maleCheck} = this.state;
     this.setState({
       maleCheck: !maleCheck,
-      femaleCheck: !femaleCheck,
     });
   };
 
+  onBtnPress = async () => {
+    try {
+      const result = await api.testAPi.postTest();
+      console.log(result);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   render() {
-    const {
-      maleCheck,
-      femaleCheck,
-      isDatePickerShow,
-      birthDayInput,
-    } = this.state;
+    const {maleCheck, isDatePickerShow, birthDayInput} = this.state;
 
     return (
       <View style={SignUpStyles.container}>
@@ -84,12 +85,21 @@ export default class Cat extends Component {
         ) : null}
         <View style={SignUpStyles.checkBoxContainer}>
           {/*this doesnt work*/}
-          <CheckBox onPress={this.onCheck} center checked={maleCheck} />
-          <Text style={SignUpStyles.checkBoxText}>Nam</Text>
-          <CheckBox onPress={this.onCheck} center checked={femaleCheck} />
-          <Text style={SignUpStyles.checkBoxText}>Nữ</Text>
+          <CheckBox center checked={maleCheck} />
+          <Text onPress={this.onCheck} style={SignUpStyles.checkBoxText}>
+            Nam
+          </Text>
+          <CheckBox onPress={this.onCheck} center checked={!maleCheck} />
+          <Text onPress={this.onCheck} style={SignUpStyles.checkBoxText}>
+            Nữ
+          </Text>
         </View>
-        <Button color="red" style={SignUpStyles.signUpButton} title="Đăng ký" />
+        <Button
+          onPress={this.onBtnPress}
+          color="red"
+          style={SignUpStyles.signUpButton}
+          title="Đăng ký"
+        />
         <View style={SignUpStyles.buttom}>
           <Text style={SignUpStyles.bottomText}>
             Khi đăng ký là bạn đã chấp nhận{' '}

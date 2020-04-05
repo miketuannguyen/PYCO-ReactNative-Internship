@@ -27,9 +27,9 @@ const SignUpStyles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   checkBoxContainer: {
-    marginTop: 10,
+    marginTop: 15,
     marginLeft: 20,
-    marginBottom: 30,
+    marginBottom: 25,
     marginRight: 20,
     flexDirection: 'row',
     alignItems: 'center',

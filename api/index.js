@@ -1,7 +1,7 @@
-import TodoApi from './todo.api';
+import TestApi from './test.api';
 
 class api {
-  static todoAPi = new TodoApi();
+  static testAPi = new TestApi();
 }
 
 export default api;

@@ -1,4 +1,4 @@
-const API_URL = 'localhost:3000';
+const API_URL = 'https://jsonplaceholder.typicode.com';
 const METHOD = {
   POST: 'POST',
   GET: 'GET',
@@ -23,7 +23,6 @@ class BaseApi {
    * Note:
    */
   baseMethod = async (method, pathname, body, authorizationToken) => {
-    let status = 400;
     const headers =
       authorizationToken !== undefined
         ? {
@@ -37,24 +36,13 @@ class BaseApi {
       headers,
     })
       .then((response) => {
-        status = response.status;
         return response.json();
       })
-      .then((result) => {
-        if (status === HTTP_STATUS_SUCCESS) {
-          return result;
-        }
-        if (result && result.message) {
-          throw new Error(result.message);
-        } else {
-          throw new Error('Có lỗi xảy ra. Vui lòng thử lại');
-        }
+      .then((jsonRes) => {
+        return jsonRes;
       })
       .catch((err) => {
-        if (err.toString() === ERROR_CONNECTION_REFUSED.server) {
-          throw new Error(ERROR_CONNECTION_REFUSED.client);
-        }
-        throw err;
+        throw new Error(err.message);
       });
   };
 
