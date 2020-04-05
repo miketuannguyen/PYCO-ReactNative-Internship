@@ -5,11 +5,6 @@ const METHOD = {
   PUT: 'PUT',
   DELETE: 'DELETE',
 };
-const HTTP_STATUS_SUCCESS = 200;
-const ERROR_CONNECTION_REFUSED = {
-  server: 'TypeError: Failed to fetch',
-  client: 'Không thể kết nối đến máy chủ, vui lòng thử lại.',
-};
 class BaseApi {
   constructor(pathUrl) {
     this.apiUrl = `${API_URL}/${pathUrl}`; // Ex: https:localhost:3000/user
